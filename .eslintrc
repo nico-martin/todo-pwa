@@ -1,0 +1,30 @@
+{
+  "plugins": [
+    "import",
+    "prettier",
+    "react"
+  ],
+  "parser": "babel-eslint",
+  "extends": [
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "no-console": "warn"
+  },
+  "settings": {
+    "react": {
+      "version": "16.11.0"
+    },
+    "import/resolver": {
+      "node": {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    },
+    "webpack": {
+      "config": "webpack.config.babel.js"
+    }
+  }
+}
