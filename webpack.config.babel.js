@@ -62,9 +62,6 @@ module.exports = (env, argv) => {
         chunkFilename: dev
           ? 'assets/[name].[id].css'
           : 'assets/[name].[id].[hash].css',
-      }),
-      new PurgecssPlugin({
-        paths: glob.sync([`${dirSrc}/**/*.jsx`, `${dirSrc}/index.html`]),
       }) /*
       new CopyWebpackPlugin([
         {

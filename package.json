@@ -16,7 +16,9 @@
     "serve": "webpack-dev-server --open"
   },
   "dependencies": {
-    "preact": "^10.2.1"
+    "idb": "^5.0.1",
+    "preact": "^10.2.1",
+    "uuid": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
