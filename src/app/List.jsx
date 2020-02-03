@@ -21,12 +21,14 @@ const List = ({ className = '', items, itemsSet, itemsRemove }) => {
           >
             {item.title}
           </span>
-          <button
-            onClick={() => itemsRemove(item.id)}
-            className="ml-auto text-red-600 hover:text-red-800"
-          >
-            delete
-          </button>
+          {item.done && (
+            <button
+              onClick={() => itemsRemove(item.id)}
+              className="ml-auto text-red-600 hover:text-red-800"
+            >
+              delete
+            </button>
+          )}
         </li>
       ))}
     </ul>
