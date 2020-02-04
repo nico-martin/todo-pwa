@@ -16,6 +16,7 @@ const List = ({ className = '', items, itemsSet, itemsRemove }) => {
             checked={item.done}
             onChange={() => itemsSet(item.id, !item.done)}
             className="mr-4 focus:shadow-outline focus:outline-none cursor-pointer"
+            title={item.done ? `mark as not yet done` : 'mark as done'}
           />
           <span
             className={`${item.done ? `line-through` : ''} mr-4 inline-block`}
@@ -25,8 +26,9 @@ const List = ({ className = '', items, itemsSet, itemsRemove }) => {
           <button
             onClick={() => itemsRemove(item.id)}
             className="ml-auto text-red-600 hover:text-red-800 c-list-item__delete"
+            title="delete list item"
           >
-            delete
+            delete list item
           </button>
         </li>
       ))}

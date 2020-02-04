@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import uuid from 'uuid/v4';
 
-import idb from './app/helpers/db';
+import idb from './app/vendor/db';
 import Header from './app/Header';
 import Form from './app/Form';
 import List from './app/List';

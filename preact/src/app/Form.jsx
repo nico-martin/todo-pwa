@@ -1,17 +1,20 @@
 import { h } from 'preact';
-import { useRef } from 'preact/hooks';
+import { useRef, useState } from 'preact/hooks';
 
 const Form = ({ className = '', itemsAdd }) => {
   const input = useRef(null);
+  const [value, setValue] = useState(
+    new URL(window.location).searchParams.get('title') || ''
+  );
 
   return (
     <form
       className={`flex items-stretch ${className}`}
       onSubmit={e => {
         e.preventDefault();
-        if (input.current.value !== '') {
-          itemsAdd(input.current.value);
-          input.current.value = '';
+        if (value !== '') {
+          itemsAdd(value);
+          setValue('');
           input.current.focus();
         }
       }}
@@ -25,6 +28,8 @@ const Form = ({ className = '', itemsAdd }) => {
         id="title"
         className="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
         ref={input}
+        value={value}
+        onChange={e => setValue(e.target.value)}
       />
       <button
         type="submit"

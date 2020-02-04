@@ -1,5 +1,5 @@
 node_modules/
 .idea/
-dist/
-.env
-yarn-error.log
+*/dist/
+*/.env
+*/yarn-error.log

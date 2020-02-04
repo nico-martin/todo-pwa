@@ -15,9 +15,12 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-//import WebpackPwaManifest from 'webpack-pwa-manifest';
-//import { GenerateSW } from 'workbox-webpack-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
+import { GenerateSW } from 'workbox-webpack-plugin';
+
 import PurgecssPlugin from 'purgecss-webpack-plugin';
+import TerserJSPlugin from 'terser-webpack-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import glob from 'glob-all';
 import tailwindcss from 'tailwindcss';
 
@@ -36,6 +39,9 @@ module.exports = (env, argv) => {
   }
 
   return {
+    optimization: {
+      minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
     entry: {
       app: `${dirSrc}/index.js`,
     },
@@ -50,7 +56,6 @@ module.exports = (env, argv) => {
     output: {
       path: dirDist,
       filename: 'assets/[name]-[hash].js',
-      publicPath: '/',
     },
     devtool: dev ? `cheap-module-eval-source-map` : undefined,
     plugins: [
@@ -62,13 +67,20 @@ module.exports = (env, argv) => {
         chunkFilename: dev
           ? 'assets/[name].[id].css'
           : 'assets/[name].[id].[hash].css',
-      }) /*
+      }),
+      ...(dev
+        ? []
+        : [
+            new PurgecssPlugin({
+              paths: glob.sync([`${dirSrc}/**/*.jsx`, `${dirSrc}/index.html`]),
+            }),
+          ]),
       new CopyWebpackPlugin([
         {
           from: 'src/static',
           to: 'assets/static',
         },
-      ]),*/,
+      ]),
       new HtmlWebpackPlugin({
         title: app.title,
         description: app.description,
@@ -85,7 +97,7 @@ module.exports = (env, argv) => {
               removeStyleLinkTypeAttributes: true,
               useShortDoctype: true,
             },
-      }) /*
+      }),
       new WebpackPwaManifest({
         name: app.title,
         short_name: app.short,
@@ -103,7 +115,7 @@ module.exports = (env, argv) => {
           },
         ],
         share_target: {
-          action: '/',
+          action: '/preact/',
           method: 'GET',
           params: {
             title: 'title',
@@ -113,10 +125,7 @@ module.exports = (env, argv) => {
         },
       }),
       new GenerateSW({
-        importWorkboxFrom: 'local',
         include: [/\.html$/, /\.js$/, /\.css$/],
-        importsDirectory: 'wb-assets',
-        exclude: [/app\.css$/],
         runtimeCaching: [
           {
             urlPattern: new RegExp(/\.(?:png|gif|jpg|svg|ico|webp)$/),
@@ -135,7 +144,7 @@ module.exports = (env, argv) => {
         ],
         navigateFallback: 'index.html',
         skipWaiting: true,
-      }),*/,
+      }),
     ],
     module: {
       rules: [
