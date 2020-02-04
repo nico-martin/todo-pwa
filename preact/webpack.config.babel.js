@@ -77,7 +77,7 @@ module.exports = (env, argv) => {
           ]),
       new CopyWebpackPlugin([
         {
-          from: 'src/static',
+          from: 'src/assets/static',
           to: 'assets/static',
         },
       ]),

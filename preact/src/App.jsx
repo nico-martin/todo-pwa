@@ -7,6 +7,7 @@ import Header from './app/Header';
 import Form from './app/Form';
 import List from './app/List';
 import Footer from './app/Footer';
+import A2H from './app/A2H';
 
 const App = () => {
   const [items, setItems] = useState([]);
@@ -42,6 +43,7 @@ const App = () => {
         itemsSet={itemsSet}
       />
       <Footer className="m-auto max-w-2xl" />
+      <A2H />
     </div>
   );
 };
