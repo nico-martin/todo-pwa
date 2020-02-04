@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
         ? []
         : [
             new PurgecssPlugin({
-              paths: glob.sync([`${dirSrc}/**/*.jsx`, `${dirSrc}/index.html`]),
+              paths: glob.sync([`${dirSrc}/**/*.vue`, `${dirSrc}/index.html`]),
             }),
           ]),
       new CopyWebpackPlugin([

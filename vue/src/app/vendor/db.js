@@ -1,6 +1,6 @@
 import { openDB } from 'idb';
 
-const dbName = 'todo-pwa';
+const dbName = 'todo-pwa-vue';
 const dbStore = 'data';
 
 const dbPromise = openDB(dbName, 1, {

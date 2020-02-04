@@ -21,6 +21,7 @@ const Form = ({ className = '', itemsAdd }) => {
   return (
     <form
       className={`flex items-stretch ${className}`}
+      autocomplete="off"
       onSubmit={e => {
         e.preventDefault();
         if (value !== '') {
@@ -41,6 +42,7 @@ const Form = ({ className = '', itemsAdd }) => {
         ref={input}
         value={value}
         onChange={e => setValue(e.target.value)}
+        autocomplete="off"
       />
       <button
         type="submit"
