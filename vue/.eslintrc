@@ -1,0 +1,18 @@
+{
+  "plugins": ["import", "prettier"],
+  "parser": "babel-eslint",
+  "extends": ["plugin:prettier/recommended", "plugin:vue/recommended"],
+  "rules": {
+    "no-console": "warn"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".vue"]
+      }
+    },
+    "webpack": {
+      "config": "webpack.config.babel.js"
+    }
+  }
+}
