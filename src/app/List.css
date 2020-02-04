@@ -1,0 +1,35 @@
+.c-list-item {
+  &__delete {
+    @apply opacity-0 bg-red-800 text-white w-4 h-4 rounded-full relative;
+    &:focus {
+      @apply opacity-100 shadow-outline outline-none;
+    }
+    text-indent: -9999px;
+    &:after,
+    &:before {
+      @apply absolute block;
+      content: '';
+      background-color: currentColor;
+      width: 1px;
+      height: 60%;
+      left: calc(50% - 0.5px);
+      top: 20%;
+      transform: rotate(45deg);
+      transform-origin: center center;
+    }
+
+    &:before {
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      @apply bg-red-600 text-white;
+    }
+  }
+
+  &:hover {
+    .c-list-item__delete {
+      @apply opacity-100;
+    }
+  }
+}

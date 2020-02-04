@@ -7,7 +7,7 @@ const Footer = ({ className = '' }) => {
       <a href="https://nico.dev" target="_blank" className="underline">
         Nico Martin
       </a>{' '}
-      - Source on{' '}
+      - Source Code on{' '}
       <a
         href="https://github.com/nico-martin/todo-pwa"
         target="_blank"

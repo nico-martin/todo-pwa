@@ -12,6 +12,7 @@ const Form = ({ className = '', itemsAdd }) => {
         if (input.current.value !== '') {
           itemsAdd(input.current.value);
           input.current.value = '';
+          input.current.focus();
         }
       }}
     >
@@ -27,7 +28,7 @@ const Form = ({ className = '', itemsAdd }) => {
       />
       <button
         type="submit"
-        className="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-500 text-center no-underline block"
+        className="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-500 text-center no-underline block focus:shadow-outline focus:outline-none"
       >
         Add
       </button>
