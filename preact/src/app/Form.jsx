@@ -1,5 +1,6 @@
-import { h } from 'preact';
+import { h, Fragment } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
+import ContactPicker from './Form/ContactPicker';
 
 const Form = ({ className = '', itemsAdd }) => {
   const input = useRef(null);
@@ -19,38 +20,41 @@ const Form = ({ className = '', itemsAdd }) => {
   }, []);
 
   return (
-    <form
-      className={`flex items-stretch ${className}`}
-      autocomplete="off"
-      onSubmit={e => {
-        e.preventDefault();
-        if (value !== '') {
-          itemsAdd(value);
-          setValue('');
-          input.current.focus();
-        }
-      }}
-    >
-      <label htmlFor="title" className="self-center font-bold">
-        New:
-      </label>
-      <input
-        type="text"
-        name="title"
-        id="title"
-        className="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
-        ref={input}
-        value={value}
-        onChange={e => setValue(e.target.value)}
+    <div className={className}>
+      <form
+        className="flex items-stretch"
         autocomplete="off"
-      />
-      <button
-        type="submit"
-        className="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-800 text-center no-underline block focus:shadow-outline focus:outline-none"
+        onSubmit={e => {
+          e.preventDefault();
+          if (value !== '') {
+            itemsAdd(value);
+            setValue('');
+            input.current.focus();
+          }
+        }}
       >
-        Add
-      </button>
-    </form>
+        <label htmlFor="title" className="self-center font-bold">
+          New:
+        </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          className="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
+          ref={input}
+          value={value}
+          onKeyUp={e => setValue(e.target.value)}
+          autocomplete="off"
+        />
+        <button
+          type="submit"
+          className="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-800 text-center no-underline block focus:shadow-outline focus:outline-none"
+        >
+          Add
+        </button>
+      </form>
+      <ContactPicker value={value} setValue={setValue} className="w-full" />
+    </div>
   );
 };
 

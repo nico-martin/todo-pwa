@@ -1,29 +1,34 @@
 <template>
-  <form
-    class="flex items-stretch"
-    @submit.prevent="onsubmit"
-    autocomplete="off"
-  >
-    <label for="title" class="self-center font-bold">
-      New:
-    </label>
-    <input
-      type="text"
-      name="title"
-      id="title"
-      class="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
-      v-model="value"
+  <div>
+    <form
+      class="flex items-stretch"
+      @submit.prevent="onsubmit"
       autocomplete="off"
-    />
-    <button
-      type="submit"
-      class="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-800 text-center no-underline block focus:shadow-outline focus:outline-none"
     >
-      Add
-    </button>
-  </form>
+      <label for="title" class="self-center font-bold">
+        New:
+      </label>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        class="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ml-2"
+        v-model="value"
+        autocomplete="off"
+      />
+      <button
+        type="submit"
+        class="font-bold rounded rounded-l-none text-white px-4 hover:bg-blue-700 bg-blue-800 text-center no-underline block focus:shadow-outline focus:outline-none"
+      >
+        Add
+      </button>
+    </form>
+    <ContactPicker class="w-full" :value="value" :set-value="setNewValue" />
+  </div>
 </template>
 <script>
+import ContactPicker from './Form/ContactPicker';
+
 export default {
   props: {
     itemsAdd: Function,
@@ -48,6 +53,12 @@ export default {
         this.value = '';
       }
     },
+    setNewValue: function(newValue) {
+      this.value = newValue;
+    },
+  },
+  components: {
+    ContactPicker,
   },
 };
 </script>
