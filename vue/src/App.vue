@@ -1,6 +1,8 @@
 <template>
   <div class="flex flex-col justify-start">
-    <Header class="w-full max-w-lg mx-auto" />
+    <div class="bg-green-800 text-white w-full shadow-lg sticky top-0">
+      <Header class="max-w-lg mx-auto" />
+    </div>
     <Form class="w-full max-w-lg mx-auto mt-10" :itemsAdd="itemsAdd" />
     <List
       class="w-full max-w-lg mx-auto my-16"

@@ -1,7 +1,7 @@
 <template>
   <button
     v-if="this.prompt"
-    class="text-white bg-blue-800 hover:bg-blue-700 rounded-full shadow a2h"
+    class="text-white hover:bg-green-800 bg-green-900 rounded-full shadow a2h"
     @click="() => this.prompt.prompt()"
   >
     <svg viewBox="0 0 24 24">

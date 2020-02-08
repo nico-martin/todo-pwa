@@ -1,5 +1,5 @@
 <template>
-  <header class="font-black text-center text-3xl">
+  <header class="font-bold text-xl py-3">
     ToDo PWA
   </header>
 </template>

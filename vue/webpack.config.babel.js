@@ -16,7 +16,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
-import { GenerateSW } from 'workbox-webpack-plugin';
+import { InjectManifest, GenerateSW } from 'workbox-webpack-plugin';
 
 import PurgecssPlugin from 'purgecss-webpack-plugin';
 import TerserJSPlugin from 'terser-webpack-plugin';
@@ -124,6 +124,11 @@ module.exports = (env, argv) => {
           },
         },
       }),
+      /*
+      new InjectManifest({
+        swSrc: './src/service-worker.js',
+        include: [/\.html$/, /\.js$/, /\.css$/],
+      }),*/
       new GenerateSW({
         include: [/\.html$/, /\.js$/, /\.css$/],
         runtimeCaching: [

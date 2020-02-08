@@ -11,16 +11,31 @@
         type="checkbox"
         :checked="item.done"
         @change="() => itemsSet(item.id, !item.done)"
-        class="mr-4 focus:shadow-outline focus:outline-none cursor-pointer"
+        :class="
+          `mr-4 focus:shadow-outline focus:outline-none cursor-pointer ${
+            item.done ? 'opacity-50' : ''
+          }`
+        "
         :title="item.done ? `mark as not yet done` : 'mark as done'"
       />
-      <span :class="`${item.done ? `line-through` : ''} mr-4 inline-block`">
+      <span
+        :class="
+          `${item.done ? `line-through text-gray-400` : ''} mr-4 inline-block`
+        "
+      >
         {{ item.title }}
       </span>
+      <PushReminder
+        :id="item.id"
+        :title="item.title"
+        class="ml-auto"
+        v-if="!item.done"
+      />
       <button
         @click="() => itemsRemove(item.id)"
-        class="ml-auto text-red-600 hover:text-red-800 c-list-item__delete"
+        class="bg-gray-400 hover:bg-red-700 text-white w-4 h-4 rounded-full relative c-list-item__delete ml-auto"
         title="delete list item"
+        v-if="item.done"
       >
         delete list item
       </button>
@@ -29,7 +44,7 @@
 </template>
 <script>
 import './List.css';
-
+import PushReminder from './List/PushReminder';
 export default {
   props: {
     items: Array,
@@ -38,6 +53,9 @@ export default {
   },
   data() {
     return {};
+  },
+  components: {
+    PushReminder,
   },
 };
 </script>
