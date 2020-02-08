@@ -80,7 +80,7 @@ module.exports = (env, argv) => {
               extractors: [
                 {
                   extractor: TailwindExtractor,
-                  extensions: ['html', 'js', 'php', 'vue'],
+                  extensions: ['html', 'js', 'vue'],
                 },
               ],
             }),
