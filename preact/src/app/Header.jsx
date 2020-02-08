@@ -2,8 +2,8 @@ import { h } from 'preact';
 
 const Header = ({ className = '' }) => {
   return (
-    <header className={`${className} font-black text-center text-3xl`}>
-      ToDo PWA
+    <header className={`${className} font-bold text-xl py-3`}>
+      ToDo PWA (PreactJS)
     </header>
   );
 };

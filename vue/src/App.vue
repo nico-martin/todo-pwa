@@ -1,16 +1,16 @@
 <template>
   <div class="flex flex-col justify-start">
     <div class="bg-green-800 text-white w-full shadow-lg sticky top-0">
-      <Header class="max-w-lg mx-auto" />
+      <Header class="w-11/12 max-w-lg mx-auto" />
     </div>
-    <Form class="w-full max-w-lg mx-auto mt-10" :itemsAdd="itemsAdd" />
+    <Form class="w-11/12 max-w-lg mx-auto mt-10" :itemsAdd="itemsAdd" />
     <List
-      class="w-full max-w-lg mx-auto my-16"
+      class="w-11/12 max-w-lg mx-auto my-16"
       :items="items"
       :itemsRemove="itemsRemove"
       :itemsSet="itemsSet"
     />
-    <Footer class="m-auto max-w-2xl" />
+    <Footer class="m-auto w-11/12 max-w-2xl" />
     <A2H />
   </div>
 </template>

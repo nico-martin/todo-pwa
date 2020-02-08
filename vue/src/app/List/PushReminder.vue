@@ -1,5 +1,6 @@
 <template>
   <button
+    v-if="supported"
     @click="schedule()"
     :class="
       (notification
@@ -42,6 +43,7 @@ export default {
   data() {
     return {
       notification: false,
+      supported: 'showTrigger' in Notification.prototype,
     };
   },
   mounted: async function() {
@@ -65,7 +67,7 @@ export default {
       const date = prompt(
         'Schedule reminder push notification',
         moment()
-          .add(10, 'seconds')
+          .add(30, 'seconds')
           .format('YYYY-MM-DD HH:mm:ss')
       );
       if (isNaN(Date.parse(date))) {

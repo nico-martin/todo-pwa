@@ -18,7 +18,7 @@ const A2H = () => {
 
   return (
     <button
-      className="text-white bg-blue-800 hover:bg-blue-700 rounded-full shadow a2h"
+      className="text-white bg-indigo-800 hover:bg-indigo-700 rounded-full shadow a2h"
       onClick={() => prompt.prompt()}
     >
       <svg viewBox="0 0 24 24">

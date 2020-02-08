@@ -34,15 +34,17 @@ const App = () => {
 
   return (
     <div className="flex flex-col justify-start">
-      <Header className="w-full max-w-lg mx-auto" />
-      <Form className="w-full max-w-lg mx-auto mt-10" itemsAdd={itemsAdd} />
+      <div className="bg-indigo-800 text-white w-full shadow-lg sticky top-0">
+        <Header className="w-11/12 max-w-lg mx-auto" />
+      </div>
+      <Form className="w-11/12 max-w-lg mx-auto mt-10" itemsAdd={itemsAdd} />
       <List
-        className="w-full max-w-lg mx-auto my-16"
+        className="w-11/12 max-w-lg mx-auto my-16"
         items={items}
         itemsRemove={itemsRemove}
         itemsSet={itemsSet}
       />
-      <Footer className="m-auto max-w-2xl" />
+      <Footer className="m-auto w-11/12 max-w-2xl" />
       <A2H />
     </div>
   );

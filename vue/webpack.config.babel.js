@@ -4,12 +4,16 @@ import fs from 'fs';
 require('dotenv').config();
 
 const app = {
-  title: 'Progressive ToDo List',
-  short: 'PWA ToDo',
-  description: 'A ToDo List as a Progressive Web App',
-  colorbkg: '#fff',
-  color: '#000',
+  title: 'Progressive ToDo List (VueJS)',
+  short: 'ToDo PWA (VueJS)',
+  description: 'A ToDo List as a Progressive Web App based on VueJS',
 };
+
+class TailwindExtractor {
+  static extract(content) {
+    return content.match(/[A-Za-z0-9-_:\/]+/g) || [];
+  }
+}
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -73,6 +77,12 @@ module.exports = (env, argv) => {
         : [
             new PurgecssPlugin({
               paths: glob.sync([`${dirSrc}/**/*.vue`, `${dirSrc}/index.html`]),
+              extractors: [
+                {
+                  extractor: TailwindExtractor,
+                  extensions: ['html', 'js', 'php', 'vue'],
+                },
+              ],
             }),
           ]),
       new CopyWebpackPlugin([
@@ -102,8 +112,8 @@ module.exports = (env, argv) => {
         name: app.title,
         short_name: app.short,
         description: app.description,
-        theme_color: app.color,
-        background_color: app.colorbkg,
+        theme_color: '#000',
+        background_color: '#fff',
         display: 'standalone',
         crossorigin: 'use-credentials',
         icons: [

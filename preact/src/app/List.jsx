@@ -1,5 +1,6 @@
 import { h } from 'preact';
 import './List.css';
+import PushReminder from './List/PushReminder';
 
 const List = ({ className = '', items, itemsSet, itemsRemove }) => {
   if (items.length === 0) {
@@ -15,21 +16,29 @@ const List = ({ className = '', items, itemsSet, itemsRemove }) => {
             type="checkbox"
             checked={item.done}
             onChange={() => itemsSet(item.id, !item.done)}
-            className="mr-4 focus:shadow-outline focus:outline-none cursor-pointer"
+            className={`mr-4 focus:shadow-outline focus:outline-none cursor-pointer ${
+              item.done ? 'opacity-25' : ''
+            }`}
             title={item.done ? `mark as not yet done` : 'mark as done'}
           />
           <span
-            className={`${item.done ? `line-through` : ''} mr-4 inline-block`}
+            className={`${
+              item.done ? `line-through text-gray-400` : ''
+            } mr-4 inline-block`}
           >
             {item.title}
           </span>
-          <button
-            onClick={() => itemsRemove(item.id)}
-            className="ml-auto text-red-600 hover:text-red-800 c-list-item__delete"
-            title="delete list item"
-          >
-            delete list item
-          </button>
+          {item.done ? (
+            <button
+              onClick={() => itemsRemove(item.id)}
+              className="bg-gray-400 hover:bg-red-700 text-white w-4 h-4 rounded-full relative c-list-item__delete ml-auto"
+              title="delete list item"
+            >
+              delete list item
+            </button>
+          ) : (
+            <PushReminder id={item.id} title={item.title} className="ml-auto" />
+          )}
         </li>
       ))}
     </ul>
