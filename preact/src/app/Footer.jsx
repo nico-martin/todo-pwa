@@ -19,6 +19,14 @@ const Footer = ({ className = '' }) => {
       >
         GitHub
       </a>
+      <br />
+      <a
+        className="inline-block mt-2"
+        href="https://todo-pwa.nico.dev/vue/"
+        target="_blank"
+      >
+        Looking for the same in <span className="underline">VueJS</span>?
+      </a>
     </footer>
   );
 };

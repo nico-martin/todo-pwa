@@ -13,7 +13,14 @@
       target="_blank"
       class="underline hover:text-black"
     >
-      GitHub
+      GitHub </a
+    ><br />
+    <a
+      class="inline-block mt-2"
+      href="https://todo-pwa.nico.dev/preact/"
+      target="_blank"
+    >
+      Looking for the same in <span class="underline">Preact</span>?
     </a>
   </footer>
 </template>
