@@ -44,7 +44,9 @@ The incoming Share-Requests can then be handeled inside your application ([VueJS
 
 ## Push Notifications
 
-This App uses the [Notification Triggers API](https://web.dev/notification-triggers/) to display scheduled push notifications. If you click on the little bell right to the todo item you can select a time when you want to recieve a reminder. ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/List/PushReminder.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/List/PushReminder.jsx))
+This App uses the [Notification Triggers API](https://web.dev/notification-triggers/) to display scheduled push notifications. If you click on the little bell right to the todo item you can select a time when you want to recieve a reminder.
+
+The Push Notification can then be handled inside the ServiceWorker. For example to open the app if the user clicks on the notification ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/service-worker.js#L25) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/service-worker.js#L25))
 
 ## Contact Picker API
 
