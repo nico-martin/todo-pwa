@@ -16,6 +16,7 @@ const PushReminder = ({ className, id, title }) => {
   useEffect(async () => setNotification(await getNotification()), [
     swRegistration,
   ]);
+
   useEffect(() => {
     if (!notification) {
       return;
@@ -28,6 +29,7 @@ const PushReminder = ({ className, id, title }) => {
     );
   }, [notification]);
 
+  // get the notification where the id starts with the item id
   const getNotification = async () => {
     if (!swRegistration) {
       return false;
@@ -49,6 +51,7 @@ const PushReminder = ({ className, id, title }) => {
   };
 
   const createNotification = async (pnTitle, body, timestamp) => {
+    // first we need to ask for permission to show push notifications
     const { state } = await navigator.permissions.request({
       name: 'notifications',
     });
@@ -59,9 +62,9 @@ const PushReminder = ({ className, id, title }) => {
     }
 
     await swRegistration.showNotification(pnTitle, {
-      tag: id + '-' + timestamp,
-      body,
-      showTrigger: new TimestampTrigger(timestamp),
+      tag: id + '-' + timestamp, // a unique ID
+      body, // content of the push notification
+      showTrigger: new TimestampTrigger(timestamp), // set the time for the push notification
     });
     setNotification(await getNotification());
   };

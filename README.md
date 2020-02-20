@@ -17,7 +17,9 @@ I'm then using [TailwindCSS](https://tailwindcss.com/) as a CSS Framework becaus
 
 ### ServiceWorker
 
-// Todo: switch to InjectManifest
+A [ServiceWorker](https://web.dev/service-workers-cache-storage/) is a JavaScript file that lives in a special scope of the browser and runs even if the browser is closed.
+
+This App uses the [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) to add generated files to the be precached. Additionally, `InjectManifest` allows us to add more ServiceWorker event listeners if we need to.
 
 ### IndexedDB
 

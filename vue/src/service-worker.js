@@ -18,3 +18,8 @@ registerRoute(
 
 new NavigationRoute('/index.html');
 precacheAndRoute(self.__WB_MANIFEST);
+
+this.addEventListener('install', event => console.log('SW installed', event));
+this.addEventListener('notificationclick', event =>
+  console.log('click on a notification', event)
+);
