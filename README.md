@@ -3,7 +3,7 @@
 This project demonstrates some of the latest progressive web app features.
 
 The functionality is quite simple: It's a Webapp thet halps you to manage ToDos.  
-For demo purposes I created the same App in VueJS and Reacr, which uses the same syntax like React.
+For demo purposes I created the same App in VueJS and React, which uses the same syntax like React.
 
 VueJS: https://github.com/nico-martin/todo-pwa/tree/master/vue  
 (P)ReactJS: https://github.com/nico-martin/todo-pwa/tree/master/preact
