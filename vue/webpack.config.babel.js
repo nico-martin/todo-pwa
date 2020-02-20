@@ -124,10 +124,15 @@ module.exports = (env, argv) => {
             ios: true,
           },
         ],
+        /**
+         * The share target allows your app to be registered as a share target.
+         * It works quite similar to an HTML Form
+         */
         share_target: {
-          action: '/vue/',
-          method: 'GET',
+          action: '/vue/', // the URL where you want to send the request
+          method: 'GET', // The HTTP Method (POST would be possible but keep in mind that POST Request should then be handled on the server or in the ServiceWorker)
           params: {
+            // The Params you want to accept and pass to the application the prompt usually uses the params title, text, url and files
             title: 'title',
             text: 'text',
             url: 'url',

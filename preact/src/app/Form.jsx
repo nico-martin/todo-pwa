@@ -9,6 +9,8 @@ const Form = ({ className = '', itemsAdd }) => {
   );
 
   useEffect(() => {
+    // The shareTargetAPI creates a get Request that looks like this:
+    // /preact/?title={title}&text={text}&url={url}
     const params = new URL(window.location).searchParams;
     const v = [
       ...(params.get('title') ? [params.get('title')] : []),

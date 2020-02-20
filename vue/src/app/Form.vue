@@ -32,6 +32,8 @@ export default {
     itemsAdd: Function,
   },
   data() {
+    // The shareTargetAPI creates a get Request that looks like this:
+    // /vue/?title={title}&text={text}&url={url}
     const params = new URL(window.location).searchParams;
     const v = [
       ...(params.get('title') ? [params.get('title')] : []),
