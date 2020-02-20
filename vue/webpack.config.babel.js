@@ -20,7 +20,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import WebpackPwaManifest from 'webpack-pwa-manifest';
-import { InjectManifest, GenerateSW } from 'workbox-webpack-plugin';
+import { InjectManifest } from 'workbox-webpack-plugin';
 
 import PurgecssPlugin from 'purgecss-webpack-plugin';
 import TerserJSPlugin from 'terser-webpack-plugin';
@@ -139,31 +139,9 @@ module.exports = (env, argv) => {
           },
         },
       }),
-      /*
       new InjectManifest({
         swSrc: './src/service-worker.js',
         include: [/\.html$/, /\.js$/, /\.css$/],
-      }),*/
-      new GenerateSW({
-        include: [/\.html$/, /\.js$/, /\.css$/],
-        runtimeCaching: [
-          {
-            urlPattern: new RegExp(/\.(?:png|gif|jpg|svg|ico|webp)$/),
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'image-cache',
-            },
-          },
-          {
-            urlPattern: new RegExp(/\.html$/),
-            handler: 'NetworkFirst',
-            options: {
-              cacheName: 'index-cache',
-            },
-          },
-        ],
-        navigateFallback: 'index.html',
-        skipWaiting: true,
       }),
     ],
     module: {

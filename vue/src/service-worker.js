@@ -1,15 +1,20 @@
-workbox.core.skipWaiting();
-workbox.core.clientsClaim();
+import { skipWaiting, clientsClaim } from 'workbox-core';
+import { precacheAndRoute } from 'workbox-precaching';
+import { registerRoute, NavigationRoute } from 'workbox-routing';
+import { CacheFirst, NetworkFirst } from 'workbox-strategies';
 
-workbox.routing.registerRoute(
+skipWaiting();
+clientsClaim();
+
+registerRoute(
   new RegExp(/\.(?:png|gif|jpg|svg|ico|webp)$/),
-  new workbox.strategies.CacheFirst({
-    cacheName: 'image-cache',
+  new CacheFirst({
+    cacheName: 'image-cache-vue',
   }),
-  new workbox.strategies.NetworkFirst({
-    cacheName: 'iindex-cache',
+  new NetworkFirst({
+    cacheName: 'index-cache-vue',
   })
 );
 
-workbox.routing.registerNavigationRoute('/index.html');
-workbox.precaching.precacheAndRoute(self.__WB_MANIFEST);
+new NavigationRoute('/index.html');
+precacheAndRoute(self.__WB_MANIFEST);

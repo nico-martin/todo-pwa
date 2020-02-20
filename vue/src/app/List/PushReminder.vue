@@ -84,6 +84,7 @@ export default {
       );
     },
     createNotification: async function(title, body, timestamp) {
+      // first we need to ask for permission to show push notifications
       const { state } = await navigator.permissions.request({
         name: 'notifications',
       });
@@ -94,12 +95,13 @@ export default {
       }
       const registration = await navigator.serviceWorker.getRegistration();
       await registration.showNotification(title, {
-        tag: this.id + '-' + timestamp,
-        body,
-        showTrigger: new TimestampTrigger(timestamp),
+        tag: this.id + '-' + timestamp, // a unique ID
+        body, // content of the push notification
+        showTrigger: new TimestampTrigger(timestamp), // set the time for the push notification
       });
       this.notification = await this.getNotification();
     },
+    // get the notification where the id starts with the item id
     getNotification: async function() {
       const registration = await navigator.serviceWorker.getRegistration();
       const notifications = await registration.getNotifications({
