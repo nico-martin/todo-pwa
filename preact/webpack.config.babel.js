@@ -124,6 +124,10 @@ module.exports = (env, argv) => {
             ios: true,
           },
         ],
+        /**
+         * The share target allows your app to be registered as a share target.
+         * It works quite similar to an HTML Form
+         */
         share_target: {
           action: '/preact/',
           method: 'GET',

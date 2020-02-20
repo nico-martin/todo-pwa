@@ -21,17 +21,17 @@ I'm then using [TailwindCSS](https://tailwindcss.com/) as a CSS Framework becaus
 
 ### IndexedDB
 
-The [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) is a Non-relational database (an Object Store) inside the Browser. In this example I'm using [idb](https://github.com/jakearchibald/idb), a promise based wrapper around the IndexedDB API. This app uses the IndexedDB to store ToDo items persistently.
+The [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) is a Non-relational database (an Object Store) inside the Browser. In this example I'm using [idb](https://github.com/jakearchibald/idb), a promise based wrapper around the IndexedDB API ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/vendor/db.js) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/vendor/db.js)). This app uses the IndexedDB to store ToDo items persistently ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/App.vue#L60-L71) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/App.jsx#L29-L36))
 
 Please not that "peristance" is still managed by the browser. In version 52, Chrome introduced the [Persistent Storage API](https://developers.google.com/web/updates/2016/06/persistent-storage) that would assure the data won't be deleted if the app matches one or criterias.
 
 ## Web App Manifest
 
-I'm using [Webpack PWA Menifest](https://github.com/Diokuz/webpack-pwa-manifest) to generate a Manifest File that provides all the information to make the app "installable" ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/webpack.config.babel.js#L111) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/webpack.config.babel.js#L111))
+I'm using [Webpack PWA Manifest](https://github.com/Diokuz/webpack-pwa-manifest) to generate a Manifest File that provides all the information to make the app "installable" ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/webpack.config.babel.js#L111) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/webpack.config.babel.js#L111))
 
 ### Add to Homescreem
 
-Instead of using the native add to homescreen promit I added a custom "add to homescreen" button. Therefore I catched the `beforeinstallprompt` event and implemented m own button ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/A2H.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/A2H.jsx))
+Instead of using the native add to homescreen promit I added a custom "add to homescreen" button. Therefore I catched the `beforeinstallprompt` event and implemented m own button ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/A2H.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/A2H.jsx))
 
 ### Share Tagret API
 
@@ -44,4 +44,4 @@ This App uses the [Notification Triggers API](https://web.dev/notification-trigg
 
 ## Contact Picker API
 
-The [Contact Picker API](https://web.dev/contact-picker/) opens a modal that allows the user to choose one or more contacts. This information can then be used by the Webapp. ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/Form/ContactPicker.vue#L41) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/Form/ContactPicker.jsx#L25))
+The [Contact Picker API](https://web.dev/contact-picker/) opens a modal that allows the user to choose one or more contacts. This information can then be used by the Webapp. ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/Form/ContactPicker.vue#L41-L49) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/Form/ContactPicker.jsx#L25-33))

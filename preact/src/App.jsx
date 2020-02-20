@@ -26,7 +26,10 @@ const App = () => {
   const itemsSet = (id, done) =>
     setItems(items.map(item => (item.id === id ? { ...item, done } : item)));
 
+  // Whenever the items Array changes, the new Values should be stored in idb
   useEffect(() => mounted && idb.set('items', items), [items]);
+
+  // on mount, the items from the idb should be set
   useEffect(() => {
     setMounted(true);
     idb.get('items').then(items => setItems(items || []));

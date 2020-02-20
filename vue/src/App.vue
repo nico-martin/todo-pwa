@@ -58,11 +58,13 @@ export default {
     },
   },
   watch: {
+    // Whenever the items Array changes, the new Values should be stored in idb
     items: function(newVal) {
       idb.set('items', newVal);
     },
   },
   mounted() {
+    // on mount, the items from the idb should be set
     idb.get('items').then(items => {
       this.items = items || [];
     });
