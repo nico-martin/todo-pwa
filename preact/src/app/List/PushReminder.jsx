@@ -8,25 +8,38 @@ const PushReminder = ({ className, id, title }) => {
     'showTrigger' in Notification.prototype
   );
   const [swRegistration, setSwRegistration] = useState(false);
-  useEffect(
-    async () =>
-      setSwRegistration(await navigator.serviceWorker.getRegistration()),
-    []
-  );
+
+  // onmount, set an event listener to the SW message to check if the notification was clicked
+  useEffect(async () => {
+    setSwRegistration(await navigator.serviceWorker.getRegistration());
+    // listen to the message event.
+    navigator.serviceWorker.addEventListener('message', async event => {
+      if (
+        (event.data?.type === 'notification-clicked' ||
+          event.data?.type === 'notification-closed') &&
+        event.data?.messageId.indexOf(id) === 0
+      ) {
+        console.log(
+          event.data?.type === 'notification-clicked'
+            ? `Notification "${title}" clicked.`
+            : `Notification "${title}" closed.`
+        );
+      }
+    });
+  }, []);
+
   useEffect(async () => setNotification(await getNotification()), [
     swRegistration,
   ]);
 
   useEffect(() => {
-    if (!notification) {
-      return;
+    if (notification) {
+      // unset notification after shown
+      window.setTimeout(
+        () => setNotification(false),
+        notification.showTrigger.timestamp - new Date().getTime()
+      );
     }
-    // Unfortunately I don't know how to listen to events like "shown" or "clicked"
-    // so this is a litte workaround :D
-    window.setTimeout(
-      () => setNotification(false),
-      notification.showTrigger.timestamp - new Date().getTime()
-    );
   }, [notification]);
 
   // get the notification where the id starts with the item id
@@ -65,6 +78,9 @@ const PushReminder = ({ className, id, title }) => {
       tag: id + '-' + timestamp, // a unique ID
       body, // content of the push notification
       showTrigger: new TimestampTrigger(timestamp), // set the time for the push notification
+      data: {
+        url: window.location.href, // pass the current url to the notification
+      },
     });
     setNotification(await getNotification());
   };
@@ -94,7 +110,7 @@ const PushReminder = ({ className, id, title }) => {
           const date = prompt(
             'Schedule reminder push notification',
             moment()
-              .add(30, 'seconds')
+              .add(5, 'seconds')
               .format('YYYY-MM-DD HH:mm:ss')
           );
           if (isNaN(Date.parse(date))) {

@@ -141,6 +141,7 @@ module.exports = (env, argv) => {
       new InjectManifest({
         swSrc: './src/service-worker.js',
         include: [/\.html$/, /\.js$/, /\.css$/],
+        maximumFileSizeToCacheInBytes: 5000000,
       }),
     ],
     module: {
