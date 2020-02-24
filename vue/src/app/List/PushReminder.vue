@@ -47,7 +47,22 @@ export default {
     };
   },
   mounted: async function() {
+    // onmount, set an event listener to the SW message to check if the notification was clicked
     this.notification = await this.getNotification();
+    // listen to the message event.
+    navigator.serviceWorker.addEventListener('message', async event => {
+      if (
+        (event.data?.type === 'notification-clicked' ||
+          event.data?.type === 'notification-closed') &&
+        event.data?.messageId.indexOf(this.id) === 0
+      ) {
+        console.log(
+          event.data?.type === 'notification-clicked'
+            ? `Notification "${this.title}" clicked.`
+            : `Notification "${this.title}" closed.`
+        );
+      }
+    });
   },
   methods: {
     schedule: function() {
@@ -67,7 +82,7 @@ export default {
       const date = prompt(
         'Schedule reminder push notification',
         moment()
-          .add(30, 'seconds')
+          .add(10, 'seconds')
           .format('YYYY-MM-DD HH:mm:ss')
       );
       if (isNaN(Date.parse(date))) {
@@ -98,6 +113,11 @@ export default {
         tag: this.id + '-' + timestamp, // a unique ID
         body, // content of the push notification
         showTrigger: new TimestampTrigger(timestamp), // set the time for the push notification
+        data: {
+          url: window.location.href, // pass the current url to the notification
+        },
+        badge: './assets/static/icon-96x96.png',
+        icon: './assets/static/icon-96x96.png',
       });
       this.notification = await this.getNotification();
     },
@@ -122,15 +142,13 @@ export default {
   },
   watch: {
     notification: function(newNotification) {
-      if (!newNotification) {
-        return;
+      if (newNotification) {
+        // unset notification after shown
+        window.setTimeout(
+          () => (this.notification = false),
+          newNotification.showTrigger.timestamp - new Date().getTime()
+        );
       }
-      // Unfortunately I don't know how to listen to events like "shown" or "clicked"
-      // so this is a litte workaround :D
-      window.setTimeout(
-        () => (this.notification = false),
-        newNotification.showTrigger.timestamp - new Date().getTime()
-      );
     },
   },
 };
