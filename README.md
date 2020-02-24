@@ -3,14 +3,14 @@
 This project demonstrates some of the latest progressive web app features.
 
 The functionality is quite simple: It's a Webapp thet halps you to manage ToDos.  
-For demo purposes I created the same App in VueJS and React, which uses the same syntax like React.
+For demo purposes I created the same App in [VueJS](https://vuejs.org) and [Preact](https://preactjs.com), which uses the same syntax like [React](https://reactjs.org).
 
 VueJS: https://github.com/nico-martin/todo-pwa/tree/master/vue  
 (P)ReactJS: https://github.com/nico-martin/todo-pwa/tree/master/preact
 
 ## Basic Setup
 
-I'm using a quite basic Webpack setup that compiles and bundles my Vue and JSX files.  
+I'm using a quite basic [Webpack](https://webpack.js.org) setup that compiles and bundles my Vue and JSX files.  
 I'm then using [TailwindCSS](https://tailwindcss.com/) as a CSS Framework because in this case I just wantend something pretty without having to care about the architecture.
 
 ## Offline usage
@@ -19,7 +19,7 @@ I'm then using [TailwindCSS](https://tailwindcss.com/) as a CSS Framework becaus
 
 A [ServiceWorker](https://web.dev/service-workers-cache-storage/) is a JavaScript file that lives in a special scope of the browser and runs even if the browser is closed.
 
-This App uses the [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) to add generated files to the be precached. Additionally, `InjectManifest` allows us to add more ServiceWorker event listeners if we need to ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/service-worker.js#L22-L25) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/service-worker.js#L22-L25)).
+This App uses the `InjectManifest` method from [workbox-webpack-plugin](https://developers.google.com/web/tools/workbox/modules/workbox-webpack-plugin) to add generated files to the ServiceWorker so they will be precached. Additionally, it allows us to add more ServiceWorker event listeners if we need to ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/service-worker.js#L23) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/service-worker.js#L23)).
 
 The ServiceWorker then needs to be registered from JavaScript ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/index.js#L9) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/index.js#L8)).
 
@@ -27,7 +27,7 @@ The ServiceWorker then needs to be registered from JavaScript ([VueJS](https://g
 
 The [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) is a Non-relational database (an Object Store) inside the Browser. In this example I'm using [idb](https://github.com/jakearchibald/idb), a promise based wrapper around the IndexedDB API ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/vendor/db.js) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/vendor/db.js)). This app uses the IndexedDB to store ToDo items persistently ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/App.vue#L60-L71) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/App.jsx#L29-L36))
 
-Please not that "peristance" is still managed by the browser. In version 52, Chrome introduced the [Persistent Storage API](https://developers.google.com/web/updates/2016/06/persistent-storage) that would assure the data won't be deleted if the app matches one or criterias.
+Please note that "peristance" is still managed by the browser. In version 52, Chrome introduced the [Persistent Storage API](https://developers.google.com/web/updates/2016/06/persistent-storage) that would assure the data won't be deleted if the app matches one or more defined criterias.
 
 ## Web App Manifest
 
@@ -35,7 +35,7 @@ I'm using [Webpack PWA Manifest](https://github.com/Diokuz/webpack-pwa-manifest)
 
 ### Add to Homescreem
 
-Instead of using the native add to homescreen promit I added a custom "add to homescreen" button. Therefore I catched the `beforeinstallprompt` event and implemented m own button ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/A2H.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/A2H.jsx))
+Instead of using the native add to homescreen promit I added a custom "add to homescreen" button. Therefore I catched the `beforeinstallprompt` event and implemented my own button ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/A2H.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/A2H.jsx))
 
 ### Share Tagret API
 
