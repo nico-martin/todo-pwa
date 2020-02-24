@@ -14,7 +14,7 @@ registerRoute(
   'GET'
 );
 
-new NavigationRoute('/index.html');
+//new NavigationRoute('/index.html');
 
 // The precache routes for workbox-webpack-plugin
 precacheAndRoute(self.__WB_MANIFEST);

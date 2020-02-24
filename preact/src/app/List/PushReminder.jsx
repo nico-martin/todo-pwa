@@ -81,6 +81,8 @@ const PushReminder = ({ className, id, title }) => {
       data: {
         url: window.location.href, // pass the current url to the notification
       },
+      badge: './assets/static/icon-96x96.png',
+      icon: './assets/static/icon-96x96.png',
     });
     setNotification(await getNotification());
   };
@@ -110,7 +112,7 @@ const PushReminder = ({ className, id, title }) => {
           const date = prompt(
             'Schedule reminder push notification',
             moment()
-              .add(5, 'seconds')
+              .add(10, 'seconds')
               .format('YYYY-MM-DD HH:mm:ss')
           );
           if (isNaN(Date.parse(date))) {
