@@ -37,6 +37,12 @@ I'm using [Webpack PWA Manifest](https://github.com/Diokuz/webpack-pwa-manifest)
 
 Instead of using the native add to homescreen promit I added a custom "add to homescreen" button. Therefore I catched the `beforeinstallprompt` event and implemented my own button ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/A2H.vue) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/A2H.jsx))
 
+### Web Share API
+
+The [web share API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share) allows us to share data from our web app the same way we do from our iOS and Android apps.
+
+Therefor we only need to call the `navigator.share`-Method with a set of data. ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/src/app/Header.vue#L28-L33) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/src/app/Header.jsx#L12-L17))
+
 ### Share Tagret API
 
 The [Share Target API](https://web.dev/web-share-target/) allows your app to be registered as a share target so it appears in the share modal whenever you want to share something using the native share propmpt. ([VueJS](https://github.com/nico-martin/todo-pwa/blob/master/vue/webpack.config.babel.js#L128) / [PreactJS](https://github.com/nico-martin/todo-pwa/blob/master/preact/webpack.config.babel.js#L128))  
