@@ -1,61 +1,69 @@
 <template>
-  <p class="text-center" v-if="items.length === 0">
-    Yay, you have nothing to do!
-  </p>
-  <ul class="border-gray-300 border-b" v-else>
-    <li
-      v-for="item in items"
-      class="flex w-full border-gray-300 border-t p-4 items-center text-sm hover:bg-white c-list-item"
-    >
-      <input
-        type="checkbox"
-        :checked="item.done"
-        @change="() => itemsSet(item.id, !item.done)"
-        :class="
-          `mr-4 focus:shadow-outline focus:outline-none cursor-pointer ${
-            item.done ? 'opacity-50' : ''
-          }`
-        "
-        :title="item.done ? `mark as not yet done` : 'mark as done'"
-      />
-      <span
-        :class="
-          `${item.done ? `line-through text-gray-400` : ''} mr-4 inline-block`
-        "
+  <div class="w-11/12 max-w-lg mx-auto my-16">
+    <p class="text-center" v-if="isEmptyItemsList">
+      <slot name="empty">Yay, you have nothing to do!</slot>
+    </p>
+    <transition-group v-else name="list" tag="ul" class="border-gray-300 border-b">
+      <li
+        :key="todo.id"
+        v-for="todo in todos"
+        class="flex w-full border-gray-300 border-t p-4 items-center text-sm hover:bg-white c-list-item"
       >
-        {{ item.title }}
-      </span>
-      <PushReminder
-        :id="item.id"
-        :title="item.title"
-        class="ml-auto"
-        v-if="!item.done"
-      />
-      <button
-        @click="() => itemsRemove(item.id)"
-        class="bg-gray-400 hover:bg-red-700 text-white w-4 h-4 rounded-full relative c-list-item__delete ml-auto"
-        title="delete list item"
-        v-if="item.done"
-      >
-        delete list item
-      </button>
-    </li>
-  </ul>
+        <slot v-bind="{todo, remove, toggle}"/>
+      </li>
+    </transition-group >
+  </div>
 </template>
+
 <script>
-import './List.css';
 import PushReminder from './List/PushReminder';
 export default {
+  components: {
+    PushReminder,
+  },
   props: {
-    items: Array,
-    itemsRemove: Function,
-    itemsSet: Function,
+    todos: {
+      type: Array,
+      default: () => ([])
+    }
+  },
+  computed: {
+    isEmptyItemsList() {
+      return this.todos.length === 0
+    }
   },
   data() {
     return {};
   },
-  components: {
-    PushReminder,
-  },
+  methods: {
+    remove(id) {
+      const items = this.todos.filter(item => id !== item.id);
+      this.$emit('update', items)
+    },
+    toggle(id) {
+      const items = this.todos.map(item => item.id === id ? { ...item, done: !item.done} : item);
+      this.$emit('update', items)
+    },
+  }
 };
 </script>
+
+<style scoped>
+.list-enter-active {
+  transition: all 200ms ease-in;
+}
+
+.list-leave-active {
+  transition: all 200ms ease-out;
+}
+
+.list-enter { /* .list-leave-active below version 2.1.8 */
+  opacity: 0;
+  transform: translateY(-60px);
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(100vw);
+}
+</style>

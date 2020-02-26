@@ -3,13 +3,12 @@
     <div class="bg-green-800 text-white w-full shadow-lg sticky top-0">
       <Header class="w-11/12 max-w-lg mx-auto" />
     </div>
-    <Form class="w-11/12 max-w-lg mx-auto mt-10" :itemsAdd="itemsAdd" />
-    <List
-      class="w-11/12 max-w-lg mx-auto my-16"
-      :items="items"
-      :itemsRemove="itemsRemove"
-      :itemsSet="itemsSet"
-    />
+    <Form class="w-11/12 max-w-lg mx-auto mt-10" @submit="itemsAdd" />
+    <List :todos="items" @update="updateList">
+      <template #default="{todo, toggle, remove}">
+        <Todo :todo="todo" @toggle="toggle" @remove="remove"/>
+      </template>
+    </List>
     <Footer class="m-auto w-11/12 max-w-2xl" />
     <A2H />
   </div>
@@ -19,9 +18,9 @@
 import Header from './app/Header';
 import Form from './app/Form';
 import List from './app/List';
+import Todo from './app/ListItem';
 import Footer from './app/Footer';
 import A2H from './app/A2H';
-import uuid from 'uuid/v4';
 import idb from './app/vendor/db';
 
 export default {
@@ -36,38 +35,32 @@ export default {
     List,
     Footer,
     A2H,
+    Todo
   },
   methods: {
-    itemsAdd: function(title) {
-      this.items = [
-        {
-          title,
-          id: uuid(),
-          done: false,
-        },
-        ...this.items,
-      ];
+    updateList(list) {
+      this.items = list
     },
-    itemsRemove: function(id) {
-      this.items = this.items.filter(item => id !== item.id);
+    itemsAdd(todo) {
+      this.items = [todo, ...this.items]
     },
-    itemsSet: function(id, done) {
-      this.items = this.items.map(item =>
-        item.id === id ? { ...item, done } : item
-      );
-    },
+    getItems() {
+      return idb.get('items').then(items => {
+        this.items = items || []
+        return itesm
+      })
+      return items
+    }
   },
   watch: {
     // Whenever the items Array changes, the new Values should be stored in idb
-    items: function(newVal) {
+    items(newVal) {
       idb.set('items', newVal);
     },
   },
   mounted() {
     // on mount, the items from the idb should be set
-    idb.get('items').then(items => {
-      this.items = items || [];
-    });
+    this.getItems()
   },
 };
 </script>
