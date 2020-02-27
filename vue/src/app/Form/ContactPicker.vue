@@ -10,19 +10,28 @@
 
 <script>
 export default {
+  model: {
+    prop: 'value',
+    event: 'update'
+  },
   props: {
-    value: String,
-    setValue: Function,
-    className: String,
+    value: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
-      supported: 'contacts' in navigator && 'ContactsManager' in window,
       text: false,
     };
   },
+  computed: {
+    supported() {
+      return 'contacts' in navigator && 'ContactsManager' in window
+    }
+  },
   watch: {
-    value: function(newValue) {
+    value(newValue) {
       let text = false;
       if (newValue.toLowerCase().indexOf('text') !== -1) {
         text = ['Do you want to text someone?', 'Write message to {contact}'];
@@ -36,17 +45,17 @@ export default {
     },
   },
   methods: {
-    openPicker: async function() {
+    async openPicker() {
       try {
         const contact = await navigator.contacts.select(['name', 'tel'], {
           multiple: false,
         });
-        this.setValue(
-          this.text[1].replace(
+        const payload = this.text[1]
+          .replace(
             '{contact}',
             contact[0].name[0] + ' - ' + contact[0].tel[0]
           )
-        );
+        this.$emit('update', payload)
       } catch (ex) {
         alert('Contact Pick failed');
       }

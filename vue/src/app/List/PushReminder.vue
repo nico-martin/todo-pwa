@@ -43,10 +43,14 @@ export default {
   data() {
     return {
       notification: false,
-      supported: 'showTrigger' in Notification.prototype,
     };
   },
-  mounted: async function() {
+  computed: {
+    supported() {
+      return 'showTrigger' in Notification.prototype
+    }
+  },
+  async mounted () {
     // onmount, set an event listener to the SW message to check if the notification was clicked
     this.notification = await this.getNotification();
     // listen to the message event.
@@ -65,7 +69,7 @@ export default {
     });
   },
   methods: {
-    schedule: function() {
+    schedule() {
       if (this.notification) {
         if (
           confirm(
@@ -98,7 +102,7 @@ export default {
         new Date(date).getTime()
       );
     },
-    createNotification: async function(title, body, timestamp) {
+    async createNotification (title, body, timestamp) {
       // first we need to ask for permission to show push notifications
       const { state } = await navigator.permissions.request({
         name: 'notifications',
@@ -122,8 +126,9 @@ export default {
       this.notification = await this.getNotification();
     },
     // get the notification where the id starts with the item id
-    getNotification: async function() {
+    async getNotification () {
       const registration = await navigator.serviceWorker.getRegistration();
+      if (!registration) return
       const notifications = await registration.getNotifications({
         includeTriggered: true,
       });
@@ -141,7 +146,7 @@ export default {
     },
   },
   watch: {
-    notification: function(newNotification) {
+    notification (newNotification) {
       if (newNotification) {
         // unset notification after shown
         window.setTimeout(
