@@ -12,13 +12,13 @@
 export default {
   model: {
     prop: 'value',
-    event: 'update'
+    event: 'update',
   },
   props: {
     value: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
@@ -27,8 +27,8 @@ export default {
   },
   computed: {
     supported() {
-      return 'contacts' in navigator && 'ContactsManager' in window
-    }
+      return 'contacts' in navigator && 'ContactsManager' in window;
+    },
   },
   watch: {
     value(newValue) {
@@ -50,12 +50,11 @@ export default {
         const contact = await navigator.contacts.select(['name', 'tel'], {
           multiple: false,
         });
-        const payload = this.text[1]
-          .replace(
-            '{contact}',
-            contact[0].name[0] + ' - ' + contact[0].tel[0]
-          )
-        this.$emit('update', payload)
+        const payload = this.text[1].replace(
+          '{contact}',
+          contact[0].name[0] + ' - ' + contact[0].tel[0]
+        );
+        this.$emit('update', payload);
       } catch (ex) {
         alert('Contact Pick failed');
       }

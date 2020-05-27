@@ -5,18 +5,18 @@
       @submit.prevent="onSubmit"
       autocomplete="off"
     >
-      <input type="hidden" v-model="form.done"/>
+      <input type="hidden" v-model="form.done" />
       <label class="flex-1">
         <span class="sr-only">New Todo</span>
-      <input
-        type="text"
-        name="todo"
-        ref="input"
-        class="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        v-model="form.title"
-        autocomplete="off"
-        placeholder="Add new todo"
-      />
+        <input
+          type="text"
+          name="todo"
+          ref="input"
+          class="appearance-none border rounded rounded-r-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          v-model="form.title"
+          autocomplete="off"
+          placeholder="Add new todo"
+        />
       </label>
       <button
         class="font-bold rounded rounded-l-none text-white px-4 hover:bg-green-800 bg-green-900 text-center no-underline block focus:shadow-outline focus:outline-none"
@@ -49,25 +49,24 @@ export default {
       form: {
         done: false,
         title: title.join(' - '),
-      }
+      },
     };
   },
   computed: {
     isEmptyTitle() {
-      return this.form.title === ''
-    }
+      return this.form.title === '';
+    },
   },
   methods: {
     onSubmit() {
       if (!this.isEmptyTitle) {
-        this.$emit('submit', {...this.form, id: uuid()})
+        this.$emit('submit', { ...this.form, id: uuid() });
         this.$nextTick(() => {
           this.form.title = '';
           this.$refs.input.focus();
-        })
+        });
       }
-    }
+    },
   },
-
 };
 </script>

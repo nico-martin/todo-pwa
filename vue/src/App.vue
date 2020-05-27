@@ -6,7 +6,7 @@
     <Form class="w-11/12 max-w-lg mx-auto mt-10" @submit="itemsAdd" />
     <List :todos="items" @update="updateList">
       <template #default="{todo, toggle, remove}">
-        <Todo :todo="todo" @toggle="toggle" @remove="remove"/>
+        <Todo :todo="todo" @toggle="toggle" @remove="remove" />
       </template>
     </List>
     <Footer class="m-auto w-11/12 max-w-2xl" />
@@ -35,22 +35,22 @@ export default {
     List,
     Footer,
     A2H,
-    Todo
+    Todo,
   },
   methods: {
     updateList(list) {
-      this.items = list
+      this.items = list;
     },
     itemsAdd(todo) {
-      this.items = [todo, ...this.items]
+      this.items = [todo, ...this.items];
     },
     getItems() {
       return idb.get('items').then(items => {
-        this.items = items || []
-        return itesm
-      })
-      return items
-    }
+        this.items = items || [];
+        return itesm;
+      });
+      return items;
+    },
   },
   watch: {
     // Whenever the items Array changes, the new Values should be stored in idb
@@ -60,7 +60,7 @@ export default {
   },
   mounted() {
     // on mount, the items from the idb should be set
-    this.getItems()
+    this.getItems();
   },
 };
 </script>

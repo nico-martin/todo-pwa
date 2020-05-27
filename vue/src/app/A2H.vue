@@ -10,7 +10,6 @@
   </button>
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -21,16 +20,16 @@ export default {
     handlePrompt(e) {
       e.preventDefault();
       this.prompt = e;
-    }
+    },
   },
-  mounted () {
+  mounted() {
     // this will catch the beforeinstallprompt and prevents the native prompt from appearing
     window.addEventListener('beforeinstallprompt', this.handlePrompt);
   },
   beforeDestroy() {
     // clean
     window.removeEventListener('beforeinstallprompt', this.handlePrompt);
-  }
+  },
 };
 </script>
 
